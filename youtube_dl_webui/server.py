@@ -3,13 +3,14 @@
 
 import json
 import flask_login as lm
-import user as um
 
 from flask import Flask
 from flask import render_template
 from flask import request, redirect, abort
 from multiprocessing import Process
 from copy import deepcopy
+
+from .user import UserManager, LoginForm
 
 MSG = None
 user_manager = None
