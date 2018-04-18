@@ -18,8 +18,10 @@ setup (
         include_package_data=True,
         zip_safe=False,
         install_requires=[
-            'Flask>=0.2',
             'youtube-dl',
+            'Flask>=0.2',
+            'Flask-Login',
+            'Flask-WTF'
         ],
         entry_points={
             'console_scripts': [
