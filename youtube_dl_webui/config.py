@@ -5,6 +5,7 @@ import logging
 import json
 
 from copy import deepcopy
+from os import urandom as urand
 from os.path import expanduser
 
 class conf_base(object):
@@ -75,6 +76,7 @@ class svr_conf(conf_base):
             #(key,              default_val,                type,       validate_regex,     call_function)
             ('host',            '127.0.0.1',                'string',   None,               None),
             ('port',            '5000',                     'string',   None,               None),
+            ('secret_key',      urand(32).decode('latin1'), 'string',   None,               None),
             ('username',        '',                         'string',   None,               None),
             ('password',        '',                         'string',   None,               None),
         ]

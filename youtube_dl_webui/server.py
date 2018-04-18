@@ -16,8 +16,6 @@ user_manager = None
 
 app = Flask(__name__)
 
-app.config.from_envvar('YOUTUBE_DL_WEBUI_APP_SETTINGS_FILE')
-
 login_manager = lm.LoginManager()
 login_manager.init_app(app)
 
@@ -30,7 +28,7 @@ MSG_INVALID_REQUEST = {'status': 'error', 'errmsg': 'invalid request'}
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if user_manager.no_user():
-        lm.login_user(user_manager.find_user_by_id(None))
+        lm.login_user(user_manager.default_user)
         return redirect('/')
 
     form = um.LoginForm()
@@ -163,10 +161,11 @@ def test(case):
 
 
 class Server(Process):
-    def __init__(self, msg_cli, usr_mgr: um.UserManager, host, port):
+    def __init__(self, msg_cli, secret_key, usr_mgr: um.UserManager, host, port):
         super(Server, self).__init__()
 
         self.MSG = msg_cli
+        self.secret_key = secret_key
         self.user_manager = usr_mgr
         self.host = host
         self.port = port
@@ -175,6 +174,7 @@ class Server(Process):
         global MSG, user_manager
         MSG, user_manager = self.MSG, self.user_manager
 
+        app.secret_key = self.secret_key
         app.run(host=self.host, port=int(self.port), use_reloader=False)
 
 
