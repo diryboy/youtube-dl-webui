@@ -28,7 +28,7 @@ class UserManager(object):
     def find_user_by_id(self, id):
         return self.default_user if id == self.default_user.get_id() else self.default_anonymous
 
-    def find_user_by_form(self, form: LoginForm):
+    def find_user_by_form(self, form):
         return self.default_user if (form.username.data, form.password.data) == (self.username, self.password) else self.default_anonymous
 
     def no_user(self):

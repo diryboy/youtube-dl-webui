@@ -161,7 +161,7 @@ def test(case):
 
 
 class Server(Process):
-    def __init__(self, msg_cli, secret_key, usr_mgr: um.UserManager, host, port):
+    def __init__(self, msg_cli, secret_key, usr_mgr, host, port):
         super(Server, self).__init__()
 
         self.MSG = msg_cli
