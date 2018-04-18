@@ -90,3 +90,4 @@ ENV/
 
 # Other file types
 *.swp
+/.vs

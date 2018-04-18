@@ -18,6 +18,7 @@ from .utils import TaskExistenceError
 from .utils import TaskError
 from .server import Server
 from .worker import Worker
+from .user import UserManager
 
 from .config import ydl_conf, conf
 from .task import TaskManager, Task
@@ -272,7 +273,8 @@ class Core(object):
         self.msg_mgr.reg_event('progress',   WorkMsgDispatcher.event_progress)
         self.msg_mgr.reg_event('fatal',      WorkMsgDispatcher.event_fatal)
 
-        self.server = Server(web_cli, self.conf['server']['host'], self.conf['server']['port'])
+        usr_mgr = UserManager(self.conf['server']['username'], self.conf['server']['password'])
+        self.server = Server(web_cli, usr_mgr, self.conf['server']['host'], self.conf['server']['port'])
 
     def start(self):
         dl_dir = self.conf['general']['download_dir']

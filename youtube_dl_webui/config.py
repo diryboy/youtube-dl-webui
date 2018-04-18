@@ -75,6 +75,8 @@ class svr_conf(conf_base):
             #(key,              default_val,                type,       validate_regex,     call_function)
             ('host',            '127.0.0.1',                'string',   None,               None),
             ('port',            '5000',                     'string',   None,               None),
+            ('username',        '',                         'string',   None,               None),
+            ('password',        '',                         'string',   None,               None),
         ]
 
     def __init__(self, conf_dict={}):
